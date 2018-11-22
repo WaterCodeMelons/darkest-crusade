@@ -2,10 +2,10 @@
 
 public class PlayerController : MonoBehaviour
 {
-    private bool isMovingLeft;
-    private bool isMovingRight;
     [SerializeField] private float movementSpeed;
     [SerializeField] private GameObject Player;
+    private bool isMovingLeft;
+    private bool isMovingRight;
 
     private void Start()
     {
