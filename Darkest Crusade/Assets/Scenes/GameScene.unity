@@ -639,7 +639,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1417704202}
-          m_MethodName: MoveLeftStart
+          m_MethodName: MovingLeft
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -656,7 +656,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1417704202}
-          m_MethodName: MoveLeftEnd
+          m_MethodName: MovingLeft
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -927,7 +927,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1417704202}
-          m_MethodName: MoveRightStart
+          m_MethodName: MovingRight
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -944,7 +944,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1417704202}
-          m_MethodName: MoveRightEnd
+          m_MethodName: MovingRight
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
