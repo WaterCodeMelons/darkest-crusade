@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using Core;
 
 namespace Assets
 {
@@ -20,40 +22,47 @@ namespace Assets
             //Mocks below
             spawnPosition = new Vector3(-6f, -2f, 0);
 
-            CreateMage();
-            CreateWarrior();
-            CreateRogue();
-            CreateCleric();
+            GameState.Instance.heroes = new List<GameObject>(
+              new GameObject[] {
+                CreateMage(),
+                CreateWarrior(),
+                CreateRogue(),
+                CreateCleric()
+              }
+            );
         }
 
 
-        public void CreateMage()
+        public GameObject CreateMage()
         {
-            Spawn(Mage);
+            return Spawn(Mage);
         }
 
-        public void CreateWarrior()
+        public GameObject CreateWarrior()
         {
-            Spawn(Warrior);
+            return Spawn(Warrior);
         }
 
-        public void CreateRogue()
+        public GameObject CreateRogue()
         {
-            Spawn(Rogue);
+            return Spawn(Rogue);
         }
 
-        public void CreateCleric()
+        public GameObject CreateCleric()
         {
-            Spawn(Cleric);
+            return Spawn(Cleric);
         }
 
-        private void Spawn(GameObject obj)
+        private GameObject Spawn(GameObject obj)
         {
             GenerateBaseStats(obj);
 
-            Instantiate(obj, spawnPosition, Quaternion.identity).transform.parent = transform;
+            GameObject hero = Instantiate(obj, spawnPosition, Quaternion.identity);
+            hero.transform.parent = transform;
 
             ChangeSpawnPosition();
+
+            return hero;
         }
 
         private void GenerateBaseStats(GameObject obj)
