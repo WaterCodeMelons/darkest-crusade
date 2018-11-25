@@ -5,7 +5,7 @@ namespace Assets
     {
         Mage,
         Warrior,
-        Rouge,
+        Rogue,
         Cleric
     }
 }
