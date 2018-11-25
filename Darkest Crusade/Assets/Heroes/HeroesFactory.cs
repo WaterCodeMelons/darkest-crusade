@@ -18,7 +18,7 @@ namespace Assets
             _statsGenerator = new StatsGenerator();
 
             //Mocks below
-            SetSpawnPosition();
+            spawnPosition = new Vector3(-6f, -2f, 0);
 
             CreateMage();
             CreateWarrior();
@@ -29,26 +29,31 @@ namespace Assets
 
         public void CreateMage()
         {
-            GenerateBaseStats(Mage);
             Spawn(Mage);
         }
 
         public void CreateWarrior()
         {
-            GenerateBaseStats(Warrior);
             Spawn(Warrior);
         }
 
         public void CreateRogue()
         {
-            GenerateBaseStats(Rogue);
             Spawn(Rogue);
         }
 
         public void CreateCleric()
         {
-            GenerateBaseStats(Cleric);
             Spawn(Cleric);
+        }
+
+        private void Spawn(GameObject obj)
+        {
+            GenerateBaseStats(obj);
+
+            Instantiate(obj, spawnPosition, Quaternion.identity).transform.parent = transform;
+
+            ChangeSpawnPosition();
         }
 
         private void GenerateBaseStats(GameObject obj)
@@ -62,19 +67,6 @@ namespace Assets
             hero.Dodge = _statsGenerator.GenerateDodge(hero.HeroClass);
             hero.Protection = _statsGenerator.GenerateProtection(hero.HeroClass);
             hero.Speed = _statsGenerator.GenerateSpeed(hero.HeroClass);
-        }
-
-        private void Spawn(GameObject obj)
-        {
-            var hero = Instantiate(obj, spawnPosition, Quaternion.identity);
-            hero.transform.parent = transform;
-
-            ChangeSpawnPosition();
-        }
-
-        private void SetSpawnPosition()
-        {
-            spawnPosition = new Vector3(-6f, -2f, 0);
         }
 
         private void ChangeSpawnPosition()
