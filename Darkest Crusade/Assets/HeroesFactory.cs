@@ -17,6 +17,7 @@ namespace Assets
         {
             _statsGenerator = new StatsGenerator();
 
+            //Mocks below
             SetSpawnPosition();
 
             CreateMage();
