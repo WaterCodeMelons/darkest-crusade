@@ -1,112 +1,118 @@
 ﻿using System;
+using Core.Extensions;
 
 namespace Assets
 {
-    public class StatsGenerator
+    public class HeroStatsGenerator
     {
         private Random _random;
 
-        public StatsGenerator()
+        public HeroStatsGenerator()
         {
             _random = new Random();
         }
 
-        public float GenerateAccuracyModifier(ClassEnum heroClass)
+        public HeroClassEnum GenerateClass()
         {
-            switch (heroClass)
+            return _random.RandomEnumValue<HeroClassEnum>();
+        }
+
+        public float GenerateAccuracyModifier(HeroClassEnum heroHeroClass)
+        {
+            switch (heroHeroClass)
             {
-                case ClassEnum.Mage:
+                case HeroClassEnum.Mage:
                     return (float) _random.Next(70, 90);
-                case ClassEnum.Warrior:
+                case HeroClassEnum.Warrior:
                     return (float) _random.Next(60, 80);
-                case ClassEnum.Rogue:
+                case HeroClassEnum.Rogue:
                     return (float) _random.Next(50, 70);
-                case ClassEnum.Cleric:
+                case HeroClassEnum.Cleric:
                     return (float) _random.Next(70, 80);
                 default:
                     return 0;
             }
         }
 
-        public float GenerateCriticalChance(ClassEnum heroClass)
+        public float GenerateCriticalChance(HeroClassEnum heroHeroClass)
         {
-            switch (heroClass)
+            switch (heroHeroClass)
             {
-                case ClassEnum.Mage:
+                case HeroClassEnum.Mage:
                     return (float) _random.Next(15, 30);
-                case ClassEnum.Warrior:
+                case HeroClassEnum.Warrior:
                     return (float) _random.Next(35, 50);
-                case ClassEnum.Rogue:
+                case HeroClassEnum.Rogue:
                     return (float) _random.Next(40, 60);
-                case ClassEnum.Cleric:
+                case HeroClassEnum.Cleric:
                     return (float) _random.Next(5, 15);
                 default:
                     return 0;
             }
         }
 
-        public float GenerateDamage(ClassEnum heroClass)
+        public float GenerateDamage(HeroClassEnum heroHeroClass)
         {
-            switch (heroClass)
+            switch (heroHeroClass)
             {
-                case ClassEnum.Mage:
+                case HeroClassEnum.Mage:
                     return (float) _random.Next(6, 10);
-                case ClassEnum.Warrior:
+                case HeroClassEnum.Warrior:
                     return (float) _random.Next(4, 7);
-                case ClassEnum.Rogue:
+                case HeroClassEnum.Rogue:
                     return (float) _random.Next(6, 9);
-                case ClassEnum.Cleric:
+                case HeroClassEnum.Cleric:
                     return (float) _random.Next(2, 4);
                 default:
                     return 0;
             }
         }
 
-        public float GenerateDodge(ClassEnum heroClass)
+        public float GenerateDodge(HeroClassEnum heroHeroClass)
         {
-            switch (heroClass)
+            switch (heroHeroClass)
             {
-                case ClassEnum.Mage:
+                case HeroClassEnum.Mage:
                     return (float)_random.Next(1, 3);
-                case ClassEnum.Warrior:
+                case HeroClassEnum.Warrior:
                     return (float)_random.Next(4, 8);
-                case ClassEnum.Rogue:
+                case HeroClassEnum.Rogue:
                     return (float)_random.Next(6, 10);
-                case ClassEnum.Cleric:
+                case HeroClassEnum.Cleric:
                     return (float)_random.Next(1, 3);
                 default:
                     return 0;
             }
         }
 
-        public float GenerateProtection(ClassEnum heroClass)
+        public float GenerateProtection(HeroClassEnum heroHeroClass)
         {
-            switch (heroClass)
+            switch (heroHeroClass)
             {
-                case ClassEnum.Mage:
+                case HeroClassEnum.Mage:
                     return (float)_random.Next(4, 6);
-                case ClassEnum.Warrior:
+                case HeroClassEnum.Warrior:
                     return (float)_random.Next(6, 10);
-                case ClassEnum.Rogue:
+                case HeroClassEnum.Rogue:
                     return (float)_random.Next(4, 7);
-                case ClassEnum.Cleric:
+                case HeroClassEnum.Cleric:
                     return (float)_random.Next(4, 6);
                 default:
                     return 0;
             }
         }
 
-        public float GenerateSpeed(ClassEnum heroClass)
+        public float GenerateSpeed(HeroClassEnum heroHeroClass)
         {
-            switch (heroClass)
+            switch (heroHeroClass)
             {
-                case ClassEnum.Mage:
+                case HeroClassEnum.Mage:
                     return (float)_random.Next(2, 4);
-                case ClassEnum.Warrior:
+                case HeroClassEnum.Warrior:
                     return (float)_random.Next(1, 3);
-                case ClassEnum.Rogue:
+                case HeroClassEnum.Rogue:
                     return (float)_random.Next(3, 5);
-                case ClassEnum.Cleric:
+                case HeroClassEnum.Cleric:
                     return (float)_random.Next(2, 4);
                 default:
                     return 0;

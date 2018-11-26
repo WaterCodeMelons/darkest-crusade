@@ -11,16 +11,16 @@ namespace Assets
         public GameObject Warrior;
         public GameObject Rogue;
         public GameObject Cleric;
-        private Vector3 spawnPosition;
+        private Vector3 _spawnPosition;
 
-        private StatsGenerator _statsGenerator;
+        private HeroStatsGenerator _heroStatsGenerator;
 
         public void Start()
         {
-            _statsGenerator = new StatsGenerator();
+            _heroStatsGenerator = new HeroStatsGenerator();
 
             //Mocks below
-            spawnPosition = new Vector3(-6f, -2f, 0);
+            _spawnPosition = new Vector3(-6f, -2f, 0);
 
             GameState.Instance.heroes = new List<GameObject>(
               new GameObject[] {
@@ -57,7 +57,7 @@ namespace Assets
         {
             GenerateBaseStats(obj);
 
-            GameObject hero = Instantiate(obj, spawnPosition, Quaternion.identity);
+            GameObject hero = Instantiate(obj, _spawnPosition, Quaternion.identity);
             hero.transform.parent = transform;
 
             ChangeSpawnPosition();
@@ -69,18 +69,21 @@ namespace Assets
         {
             var hero = obj.GetComponent<Hero>();
 
-            hero.Level = 1;
-            hero.AccuracyModifier = _statsGenerator.GenerateAccuracyModifier(hero.HeroClass);
-            hero.CriticalChance = _statsGenerator.GenerateCriticalChance(hero.HeroClass);
-            hero.Damage = _statsGenerator.GenerateDamage(hero.HeroClass);
-            hero.Dodge = _statsGenerator.GenerateDodge(hero.HeroClass);
-            hero.Protection = _statsGenerator.GenerateProtection(hero.HeroClass);
-            hero.Speed = _statsGenerator.GenerateSpeed(hero.HeroClass);
+            hero.Level.Value = 1;
+            hero.HealthPoint.Value = 1;
+            hero.ManaPoint.Value = 100;
+            hero.HeroClass.Value = _heroStatsGenerator.GenerateClass();
+            hero.AccuracyModifier.Value = _heroStatsGenerator.GenerateAccuracyModifier(hero.HeroClass.Value);
+            hero.CriticalChance.Value = _heroStatsGenerator.GenerateCriticalChance(hero.HeroClass.Value);
+            hero.Damage.Value = _heroStatsGenerator.GenerateDamage(hero.HeroClass.Value);
+            hero.Dodge.Value = _heroStatsGenerator.GenerateDodge(hero.HeroClass.Value);
+            hero.Protection.Value = _heroStatsGenerator.GenerateProtection(hero.HeroClass.Value);
+            hero.Speed.Value = _heroStatsGenerator.GenerateSpeed(hero.HeroClass.Value);
         }
 
         private void ChangeSpawnPosition()
         {
-            spawnPosition = new Vector3(spawnPosition.x + 1.5f, spawnPosition.y, spawnPosition.z);
+            _spawnPosition = new Vector3(_spawnPosition.x + 1.5f, _spawnPosition.y, _spawnPosition.z);
         }
     }
 }
