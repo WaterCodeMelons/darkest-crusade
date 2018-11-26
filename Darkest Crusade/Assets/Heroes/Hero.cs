@@ -1,15 +1,18 @@
 ﻿using Assets;
+using UniRx;
 using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
-    public ClassEnum HeroClass;
-    public int Level;
+    public ReactiveProperty<HeroClassEnum> HeroClass = new ReactiveProperty<HeroClassEnum>();
+    public ReactiveProperty<float> HealthPoint = new ReactiveProperty<float>();
+    public ReactiveProperty<float> ManaPoint = new ReactiveProperty<float>();
+    public ReactiveProperty<int> Level = new ReactiveProperty<int>();
 
-    public float AccuracyModifier;
-    public float CriticalChance;
-    public float Damage;
-    public float Dodge;
-    public float Protection;
-    public float Speed;
+    public ReactiveProperty<float> AccuracyModifier = new ReactiveProperty<float>();
+    public ReactiveProperty<float> CriticalChance = new ReactiveProperty<float>();
+    public ReactiveProperty<float> Damage = new ReactiveProperty<float>();
+    public ReactiveProperty<float> Dodge = new ReactiveProperty<float>();
+    public ReactiveProperty<float> Protection = new ReactiveProperty<float>();
+    public ReactiveProperty<float> Speed = new ReactiveProperty<float>();
 }

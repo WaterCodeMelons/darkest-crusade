@@ -928,3 +928,46 @@ MonoBehaviour:
   Warrior: {fileID: 1965848498354656, guid: b67f04cf1880b5149bbd1a960a5b615c, type: 2}
   Rogue: {fileID: 1726390144053148, guid: ac8ec09109c789d4f925668ac0e36081, type: 2}
   Cleric: {fileID: 1520714905586588, guid: 941e81ba278cbed418f66327ff6739e4, type: 2}
+--- !u!1 &2087011137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2087011139}
+  - component: {fileID: 2087011138}
+  m_Layer: 0
+  m_Name: Enemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2087011138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2087011137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f697dccced1e47548e609ee7b313b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MonsterPrefabs:
+  - {fileID: 1880238110076734, guid: c3d69c33b5639e14884c689ccd3b42d4, type: 2}
+  - {fileID: 1137430971620084, guid: 73aeb0d8d6d7d5b4c89de9777a5ccb6f, type: 2}
+--- !u!4 &2087011139
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2087011137}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.971054, y: 1.8697551, z: -0.2205051}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

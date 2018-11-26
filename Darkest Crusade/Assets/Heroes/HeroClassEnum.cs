@@ -1,7 +1,7 @@
 ﻿
 namespace Assets
 {
-    public enum ClassEnum
+    public enum HeroClassEnum
     {
         Mage,
         Warrior,
