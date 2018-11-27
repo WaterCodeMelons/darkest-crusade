@@ -1,42 +1,39 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UniRx;
+using UniRx.Triggers;
+using Core;
 
 public class PlayerController : MonoBehaviour
 {
     public float movementSpeed;
-    [SerializeField] private GameObject Player;
-    private bool isMovingLeft;
-    private bool isMovingRight;
+    public Button moveLeftController;
+    public Button moveRightController;
 
-    private void Update()
+    void Start()
     {
-        if (isMovingLeft)
-        {
-            MoveLeft();
-        }
+        GameState.Instance.DungeonState.PlayerX
+            .Subscribe(x => transform.position = new Vector3(x, transform.position.y, transform.position.z));
 
-        if (isMovingRight)
-        {
-            MoveRight();
-        }
+        moveLeftController.OnPointerDownAsObservable()
+            .SelectMany(_ => this.gameObject.UpdateAsObservable())
+            .TakeUntil(moveLeftController.OnPointerUpAsObservable())
+            .RepeatUntilDestroy(this)
+            .Subscribe(_ => Move(-1));
+
+        moveRightController.OnPointerDownAsObservable()
+            .SelectMany(_ => this.gameObject.UpdateAsObservable())
+            .TakeUntil(moveRightController.OnPointerUpAsObservable())
+            .RepeatUntilDestroy(this)
+            .Subscribe(_ => Move(1)); 
     }
 
-    public void MovingLeft()
+    void Move(float direction)
     {
-        isMovingLeft = !isMovingLeft;
-    }
-
-    public void MovingRight()
-    {
-        isMovingRight = !isMovingRight;
-    }
-
-    public void MoveLeft()
-    {
-        Player.transform.position -= new Vector3(1, 0, 0) * movementSpeed * Time.deltaTime;
-    }
-
-    public void MoveRight()
-    {
-        Player.transform.position += new Vector3(1, 0, 0) * movementSpeed * Time.deltaTime;
+        GameState.Instance.DungeonState.PlayerX.Value = Mathf.Clamp(
+            GameState.Instance.DungeonState.PlayerX.Value + (direction * movementSpeed * Time.deltaTime),
+            GameState.Instance.DungeonState.DungeonStart,
+            GameState.Instance.DungeonState.DungeonEnd
+        );
     }
 }
