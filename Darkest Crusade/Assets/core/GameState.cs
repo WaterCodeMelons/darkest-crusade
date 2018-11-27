@@ -5,7 +5,6 @@ using UniRx;
 
 namespace Core
 {
-
   public class GameState : Singleton<GameState>
   {
     public List<GameObject> heroes;
