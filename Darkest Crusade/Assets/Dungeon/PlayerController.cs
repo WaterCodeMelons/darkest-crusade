@@ -2,17 +2,11 @@
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float movementSpeed;
+    public float movementSpeed;
     [SerializeField] private GameObject Player;
     private bool isMovingLeft;
     private bool isMovingRight;
 
-    private void Start()
-    {
-        movementSpeed = 2;
-    }
-
-    // Update is called once per frame
     private void Update()
     {
         if (isMovingLeft)
