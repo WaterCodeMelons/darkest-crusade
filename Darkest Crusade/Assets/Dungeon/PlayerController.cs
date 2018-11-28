@@ -32,8 +32,8 @@ public class PlayerController : MonoBehaviour
     {
         GameState.Instance.DungeonState.PlayerX.Value = Mathf.Clamp(
             GameState.Instance.DungeonState.PlayerX.Value + (direction * movementSpeed * Time.deltaTime),
-            GameState.Instance.DungeonState.DungeonStart,
-            GameState.Instance.DungeonState.DungeonEnd
+            GameState.Instance.DungeonState.DungeonScope.start,
+            GameState.Instance.DungeonState.DungeonScope.end
         );
     }
 }
