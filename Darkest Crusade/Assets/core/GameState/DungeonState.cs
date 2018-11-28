@@ -5,12 +5,23 @@ using UniRx;
 
 namespace Core
 {
+  public class DungeonScope
+  {
+    public int start;
+    public int end;
+  }
+  
+  public class DungeonLight
+  {
+    public Color color;
+    public float intensity;
+  }
+
   public class DungeonState
   {
-    public int DungeonStart;
-    public int DungeonEnd;
-    public Color EnvLightColor;
-    public List<Color> LightsColor;
+    public DungeonScope DungeonScope;
+    public DungeonLight EnvLight;
+    public List<DungeonLight> Lights;
     public ReactiveProperty<float> PlayerX;
   }
 }
