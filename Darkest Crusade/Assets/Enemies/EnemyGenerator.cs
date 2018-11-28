@@ -40,7 +40,7 @@ namespace Assets.Enemies
 
         private List<Hero> GetHeroes()
         {
-            var gameObjects = GameState.Instance.heroes;
+            var gameObjects = GameState.Instance.teamHeroes;
             var heroes = new List<Hero>();
 
             foreach (var gameObject in gameObjects)
