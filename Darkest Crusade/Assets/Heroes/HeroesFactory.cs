@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Core;
+using UniRx;
 
 namespace Assets
 {
@@ -13,16 +14,14 @@ namespace Assets
         public GameObject Cleric;
         private Vector3 _spawnPosition;
 
-        private HeroStatsGenerator _heroStatsGenerator;
+        private HeroStatsGenerator _heroStatsGenerator = new HeroStatsGenerator();
 
         public void Start()
-        {
-            _heroStatsGenerator = new HeroStatsGenerator();
-
+        {   
             //Mocks below
             _spawnPosition = new Vector3(-6f, -2f, 0);
 
-            GameState.Instance.heroes = new List<GameObject>(
+            GameState.Instance.teamHeroes = new ReactiveCollection<GameObject>(
               new GameObject[] {
                 CreateMage(),
                 CreateWarrior(),
@@ -65,6 +64,18 @@ namespace Assets
             return hero;
         }
 
+        public GameObject SpawnOnUI(GameObject obj, GameObject parent, HeroStatusEnum status)
+        {
+            GenerateBaseStats(obj);
+            SetStatus(obj, status);
+            GameObject hero = Instantiate(obj, _spawnPosition, Quaternion.identity, parent.transform);
+            return hero;
+        }
+
+        private void SetStatus(GameObject obj, HeroStatusEnum status) {
+            obj.GetComponent<Hero>().HeroStatus.Value = status;
+        }
+
         private void GenerateBaseStats(GameObject obj)
         {
             var hero = obj.GetComponent<Hero>();
@@ -72,7 +83,8 @@ namespace Assets
             hero.Level.Value = 1;
             hero.HealthPoint.Value = 1;
             hero.ManaPoint.Value = 100;
-            hero.HeroClass.Value = _heroStatsGenerator.GenerateClass();
+            hero.HeroClass.Value = HeroClassEnum.Warrior;
+            //hero.HeroClass.Value = _heroStatsGenerator.GenerateClass();
             hero.AccuracyModifier.Value = _heroStatsGenerator.GenerateAccuracyModifier(hero.HeroClass.Value);
             hero.CriticalChance.Value = _heroStatsGenerator.GenerateCriticalChance(hero.HeroClass.Value);
             hero.Damage.Value = _heroStatsGenerator.GenerateDamage(hero.HeroClass.Value);
