@@ -6,6 +6,7 @@ public class Hero : MonoBehaviour
 {
     public ReactiveProperty<HeroClassEnum> HeroClass = new ReactiveProperty<HeroClassEnum>();
     public ReactiveProperty<HeroStatusEnum> HeroStatus = new ReactiveProperty<HeroStatusEnum>();
+    public ReactiveProperty<float> HeroValue = new ReactiveProperty<float>();
     public ReactiveProperty<float> HealthPoint = new ReactiveProperty<float>();
     public ReactiveProperty<float> ManaPoint = new ReactiveProperty<float>();
     public ReactiveProperty<int> Level = new ReactiveProperty<int>();

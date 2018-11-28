@@ -51,6 +51,23 @@ namespace Assets
             }
         }
 
+        public float GenerateValue(HeroClassEnum heroHeroClass)
+        {
+            switch (heroHeroClass)
+            {
+                case HeroClassEnum.Mage:
+                    return (float) _random.Next(100, 200);
+                case HeroClassEnum.Warrior:
+                    return (float) _random.Next(200, 400);
+                case HeroClassEnum.Rogue:
+                    return (float) _random.Next(100, 200);
+                case HeroClassEnum.Cleric:
+                    return (float) _random.Next(200, 400);
+                default:
+                    return 0;
+            }
+        }
+
         public float GenerateDamage(HeroClassEnum heroHeroClass)
         {
             switch (heroHeroClass)

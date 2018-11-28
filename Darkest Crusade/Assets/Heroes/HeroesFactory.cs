@@ -56,20 +56,19 @@ namespace Assets
         {
             GenerateBaseStats(obj);
 
-            GameObject hero = Instantiate(obj, _spawnPosition, Quaternion.identity);
-            hero.transform.parent = transform;
+            Instantiate(obj, _spawnPosition, Quaternion.identity, transform);
 
             ChangeSpawnPosition();
 
-            return hero;
+            return obj;
         }
 
         public GameObject SpawnOnUI(GameObject obj, GameObject parent, HeroStatusEnum status)
         {
             GenerateBaseStats(obj);
             SetStatus(obj, status);
-            GameObject hero = Instantiate(obj, _spawnPosition, Quaternion.identity, parent.transform);
-            return hero;
+            Instantiate(obj, _spawnPosition, Quaternion.identity, parent.transform);
+            return obj;
         }
 
         private void SetStatus(GameObject obj, HeroStatusEnum status) {
@@ -78,13 +77,13 @@ namespace Assets
 
         private void GenerateBaseStats(GameObject obj)
         {
-            var hero = obj.GetComponent<Hero>();
+            Hero hero = obj.GetComponent<Hero>();
 
             hero.Level.Value = 1;
             hero.HealthPoint.Value = 1;
             hero.ManaPoint.Value = 100;
-            hero.HeroClass.Value = HeroClassEnum.Warrior;
-            //hero.HeroClass.Value = _heroStatsGenerator.GenerateClass();
+            hero.HeroClass.Value = _heroStatsGenerator.GenerateClass();
+            hero.HeroValue.Value = _heroStatsGenerator.GenerateValue(hero.HeroClass.Value);
             hero.AccuracyModifier.Value = _heroStatsGenerator.GenerateAccuracyModifier(hero.HeroClass.Value);
             hero.CriticalChance.Value = _heroStatsGenerator.GenerateCriticalChance(hero.HeroClass.Value);
             hero.Damage.Value = _heroStatsGenerator.GenerateDamage(hero.HeroClass.Value);

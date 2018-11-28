@@ -990,7 +990,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1473682833621774, guid: 22c5e15962acb4d6b9c4d9a83f87114e, type: 2}
       propertyPath: m_Name
-      value: Panel (1)
+      value: Panel
       objectReference: {fileID: 0}
     - target: {fileID: 114736005538366176, guid: 22c5e15962acb4d6b9c4d9a83f87114e,
         type: 2}
@@ -1141,6 +1141,25 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114172667378924176, guid: 22c5e15962acb4d6b9c4d9a83f87114e,
+        type: 2}
+      propertyPath: m_text
+      value: Buy
+      objectReference: {fileID: 0}
+    - target: {fileID: 114172667378924176, guid: 22c5e15962acb4d6b9c4d9a83f87114e,
+        type: 2}
+      propertyPath: m_textInfo.characterCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442290943375770, guid: 22c5e15962acb4d6b9c4d9a83f87114e, type: 2}
+      propertyPath: m_Name
+      value: Level
+      objectReference: {fileID: 0}
+    - target: {fileID: 224317653344798740, guid: 22c5e15962acb4d6b9c4d9a83f87114e,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22c5e15962acb4d6b9c4d9a83f87114e, type: 2}
@@ -2924,50 +2943,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1443437616
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1443437618}
-  - component: {fileID: 1443437617}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1443437617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1443437616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5e222c5766d81a4ab8d521fe5840674, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Mage: {fileID: 1750566047210544, guid: cb0cd7966e0414243b3e8fecd28e5fb5, type: 2}
-  Warrior: {fileID: 1965848498354656, guid: b67f04cf1880b5149bbd1a960a5b615c, type: 2}
-  Rogue: {fileID: 1726390144053148, guid: ac8ec09109c789d4f925668ac0e36081, type: 2}
-  Cleric: {fileID: 1520714905586588, guid: 941e81ba278cbed418f66327ff6739e4, type: 2}
---- !u!4 &1443437618
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1443437616}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 366.31534, y: 275.21503, z: 8.711425}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1572970253
 GameObject:
   m_ObjectHideFlags: 0

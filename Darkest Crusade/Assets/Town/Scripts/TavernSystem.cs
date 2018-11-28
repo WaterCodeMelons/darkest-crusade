@@ -40,7 +40,7 @@ namespace Assets
 			PopulatePanel(GameState.Instance.tavernHeroes);
 		}
 
-		public void BuyHero(GameObject obj) {
+		public void BuyHero(Button button, GameObject obj) {
 			
 		}
 
@@ -48,20 +48,23 @@ namespace Assets
 		{
 			while (tavernHeroes.Count < 4)
 			{
-				Debug.Log(GameState.Instance.tavernHeroes.Count);
 				GameState.Instance.tavernHeroes.Add(_heroFactory.SpawnOnUI(singleHeroPanel, heroListPanel, HeroStatusEnum.InTavern));
 			}
 			KillAllChildren(heroListPanel);
 			foreach (GameObject item in tavernHeroes)
 			{
 				GeneratePanel(item);
+
 			}
 		}
 
 		public void GeneratePanel(GameObject heroObject) 
 		{
 			heroObject = _heroFactory.SpawnOnUI(singleHeroPanel, heroListPanel, HeroStatusEnum.InTavern);
-			TextMeshProUGUI[] heroClass = heroObject.GetComponentsInChildren<TextMeshProUGUI>();
+			TextMeshProUGUI[] heroClassTexts = heroObject.GetComponentsInChildren<TextMeshProUGUI>();
+			heroObject.GetComponentsInChildren<TextMeshProUGUI>()[0].text = heroObject.GetComponent<Hero>().HeroClass.ToString();
+			heroObject.GetComponentsInChildren<TextMeshProUGUI>()[1].text = heroObject.GetComponent<Hero>().Level.ToString();
+			heroObject.GetComponentsInChildren<TextMeshProUGUI>()[2].text = "BUY\n" + heroObject.GetComponent<Hero>().HeroValue.Value.ToString();
 			Image heroImage = heroObject.GetComponentInChildren<Image>();
 		}
 
