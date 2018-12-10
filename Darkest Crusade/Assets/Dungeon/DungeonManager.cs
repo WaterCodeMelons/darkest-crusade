@@ -8,6 +8,8 @@ public class DungeonManager : MonoBehaviour {
   public int[] dungeonBounds = { 0, 450 };
   public int minDungeonlength = 50;
   public int maxDungeonLength = 300;
+  public int startRockOffset = -13;
+  public int endRockOffset = 8;
   public Transform StartRock;
   public Transform EndRock;
   public Light EnvLight;
@@ -16,38 +18,78 @@ public class DungeonManager : MonoBehaviour {
   void Awake()
   {
     if (GameState.Instance.DungeonState == null) {
-      int start = dungeonBounds[0],
-          end   = dungeonBounds[1];
-
-      do {
-        start = Random.Range(dungeonBounds[0], dungeonBounds[1]);
-        end = Random.Range(dungeonBounds[0], dungeonBounds[1]);
-      } while(end - start < minDungeonlength || end - start > maxDungeonLength);
-
-      List<Color> colors = new List<Color>();
-
-      foreach (Light l in SceneLights)
-      {
-          Color color = new Color(Random.value, Random.value, Random.value);
-          colors.Add(color);
-      }
-
+      DungeonScope scope = generateDungeonScope();
       GameState.Instance.DungeonState = new DungeonState()
       {
-        DungeonStart = start,
-        DungeonEnd = end,
-        EnvLightColor = new Color(Random.value, Random.value, Random.value),
-        LightsColor = colors,
-        PlayerX = new ReactiveProperty<float>(start),
+        DungeonScope = scope,
+        EnvLight = generateEnvLight(),
+        Lights = generateLights(),
+        PlayerX = new ReactiveProperty<float>(scope.start + 1),
       };
     }
-    StartRock.position = new Vector3(GameState.Instance.DungeonState.DungeonStart - 13, StartRock.position.y, StartRock.position.z);
-    EndRock.position = new Vector3(GameState.Instance.DungeonState.DungeonEnd + 8, EndRock.position.y, EndRock.position.z);
-    EnvLight.color = GameState.Instance.DungeonState.EnvLightColor;
+
+    Initialize();
+  }
+
+  DungeonScope generateDungeonScope()
+  {
+    int start = dungeonBounds[0],
+        end   = dungeonBounds[1];
+
+    do {
+      start = Random.Range(dungeonBounds[0], dungeonBounds[1]);
+      end = Random.Range(dungeonBounds[0], dungeonBounds[1]);
+    } while(end - start < minDungeonlength || end - start > maxDungeonLength);
+
+    return new DungeonScope(){ start = start, end = end };
+  }
+
+  DungeonLight generateEnvLight()
+  {
+    return new DungeonLight()
+    {
+      color = new Color(Random.value, Random.value, Random.value),
+      intensity = Random.value,
+    };
+  }
+
+  List<DungeonLight> generateLights()
+  {
+    List<DungeonLight> lights = new List<DungeonLight>();
+
+    foreach (Light l in SceneLights)
+    {
+        lights.Add(new DungeonLight()
+        {
+          color = new Color(Random.value, Random.value, Random.value),
+          intensity = Random.value,
+        });
+    }
+
+    return lights;
+  }
+
+  void Initialize()
+  {
+    StartRock.position = new Vector3(
+      GameState.Instance.DungeonState.DungeonScope.start + startRockOffset,
+      StartRock.position.y,
+      StartRock.position.z
+    );
+
+    EndRock.position = new Vector3(
+      GameState.Instance.DungeonState.DungeonScope.end + endRockOffset,
+      EndRock.position.y,
+      EndRock.position.z
+    );
+
+    EnvLight.color = GameState.Instance.DungeonState.EnvLight.color;
+    EnvLight.intensity = GameState.Instance.DungeonState.EnvLight.intensity;
+
     for(int i = 0; i < SceneLights.Count; i++)
     {
-      SceneLights[i].color = GameState.Instance.DungeonState.LightsColor[i];
-      SceneLights[i].intensity = Random.Range(1f, 5f);
+      SceneLights[i].color = GameState.Instance.DungeonState.Lights[i].color;
+      SceneLights[i].intensity = GameState.Instance.DungeonState.Lights[i].intensity;
     }
   }
 }
