@@ -25,16 +25,25 @@ public class TrinketShopSystem : MonoBehaviour {
 
     public void PopulatePanel(ReactiveCollection<GameObject> shopTrinkets)
     {
-        while (shopTrinkets.Count < 2)
+        while (shopTrinkets.Count < 3)
         {
-            GameState.Instance.shopTrinkets.Add(singleTrinketPanel);
+            GameState.Instance.shopTrinkets.Add(_trinketFactory.SpawnOnUI(singleTrinketPanel, trinketListPanel));
         }
+        KillAllChildren(trinketListPanel);
         foreach (GameObject item in shopTrinkets)
         {
             GeneratePanel(item);
         }
     }
 
+    private void KillAllChildren(GameObject parentObject) 
+    {
+        if (parentObject.transform.childCount!=0) {
+            foreach (Transform child in parentObject.transform) {
+                GameObject.Destroy(child.gameObject);
+            }
+        }
+    }
     private string createString(Trinket trinket, bool isBuff)                                               // TODO Refactor
     {
         return isBuff
