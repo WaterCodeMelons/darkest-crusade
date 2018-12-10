@@ -25,7 +25,7 @@ public class TrinketShopSystem : MonoBehaviour {
 
     public void PopulatePanel(ReactiveCollection<GameObject> shopTrinkets)
     {
-        while (shopTrinkets.Count < 3)
+        while (shopTrinkets.Count < 2)
         {
             GameState.Instance.shopTrinkets.Add(singleTrinketPanel);
         }
