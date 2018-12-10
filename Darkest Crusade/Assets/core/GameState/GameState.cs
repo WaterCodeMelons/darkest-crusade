@@ -11,6 +11,7 @@ namespace Core
     public ReactiveCollection<GameObject> campHeroes;
     public ReactiveCollection<GameObject> churchHeroes;
     public ReactiveCollection<GameObject> tavernHeroes = new ReactiveCollection<GameObject>();
+    public ReactiveCollection<GameObject> shopTrinkets = new ReactiveCollection<GameObject>();
     public ReactiveCollection<GameObject> teamHeroes;
     public DungeonState DungeonState;
   }
