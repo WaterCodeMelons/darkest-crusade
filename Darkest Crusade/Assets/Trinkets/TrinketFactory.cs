@@ -6,25 +6,26 @@ using Assets;
 using System.Linq;
 using System.Collections.Generic;
 
-public class TrinketFactory : MonoBehaviour {
-
-
-    private TrinketStatsGenerator _trinketStatsGenerator = new TrinketStatsGenerator();
+public class TrinketFactory : MonoBehaviour
+{
+    private TrinketStatsGenerator _trinketStatsGenerator;
     private Vector3 _spawnPosition;
-
-
 
     private void GenerateBaseStats(GameObject obj)
     {
-        Trinket trinket = obj.GetComponent<Trinket>();
-        
+        if (_trinketStatsGenerator == null)
+        {
+            _trinketStatsGenerator = new TrinketStatsGenerator();
+            _spawnPosition = new Vector3(0, 0, 0);
+        }
+
+        var trinket = obj.GetComponent<Trinket>();
+
         trinket.TrinketClass.Value = _trinketStatsGenerator.GenerateClass();
 
         var buffDict = _trinketStatsGenerator.BuffGenerator(trinket.TrinketClass.Value);
-        
 
         trinket.TrinketValue.Value = _trinketStatsGenerator.TrinketValueGenerator(trinket.TrinketClass.Value);
-
         trinket.AccuracyBuff.Value = buffDict[TrinketBuffEnum.Accuracy];
         trinket.CriticalChanceBuff.Value = buffDict[TrinketBuffEnum.CritChance];
         trinket.DamageBuff.Value = buffDict[TrinketBuffEnum.Damage];
@@ -41,9 +42,9 @@ public class TrinketFactory : MonoBehaviour {
         };
         trinket.Buff = buff;
 
-       
         
         var isEpic = trinket.TrinketClass.Value == TrinketClassEnum.Epic;
+
         if (!isEpic)
         {
             KeyValuePair<TrinketBuffEnum, int> debuffFromDict;
@@ -61,18 +62,15 @@ public class TrinketFactory : MonoBehaviour {
                 debuffFromDict = debuffDict.FirstOrDefault(x => x.Value != 0);
             }
             while (buffFromDict.Key == debuffFromDict.Key);
-            
 
             var debuff = new Buff()
             {
-
-            BuffType = debuffFromDict.Key,
-            BuffValue = debuffFromDict.Value
+                BuffType = debuffFromDict.Key,
+                BuffValue = debuffFromDict.Value
             };
-        trinket.Debuff = debuff;
-        }
-       
 
+            trinket.Debuff = debuff;
+        }
     }
 
     public GameObject SpawnOnUI(GameObject obj, GameObject parent)
@@ -81,6 +79,4 @@ public class TrinketFactory : MonoBehaviour {
         Instantiate(obj, _spawnPosition, Quaternion.identity, parent.transform);
         return obj;
     }
-
-
 }
