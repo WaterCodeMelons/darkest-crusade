@@ -64,7 +64,7 @@ namespace Assets
 			TextMeshProUGUI[] heroClassTexts = heroObject.GetComponentsInChildren<TextMeshProUGUI>();
 			heroObject.GetComponentsInChildren<TextMeshProUGUI>()[0].text = heroObject.GetComponent<Hero>().HeroClass.ToString();
 			heroObject.GetComponentsInChildren<TextMeshProUGUI>()[1].text = heroObject.GetComponent<Hero>().Level.ToString();
-			heroObject.GetComponentsInChildren<TextMeshProUGUI>()[2].text = "BUY\n" + heroObject.GetComponent<Hero>().HeroValue.Value.ToString();
+			heroObject.GetComponentsInChildren<TextMeshProUGUI>()[2].text = "Buy for\n" + heroObject.GetComponent<Hero>().HeroValue.Value.ToString() + " gold";
 			Image heroImage = heroObject.GetComponentInChildren<Image>();
 		}
 
