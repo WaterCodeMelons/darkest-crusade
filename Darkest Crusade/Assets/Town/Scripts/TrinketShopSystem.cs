@@ -1,21 +1,20 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Core;
 using UniRx;
 using UnityEngine.UI;
 using TMPro;
-using Assets;
 
 public class TrinketShopSystem : MonoBehaviour {
 
 	public GameObject trinketListPanel;
     public GameObject singleTrinketPanel;
-    private TrinketFactory _trinketFactory = new TrinketFactory();
+    private TrinketFactory _trinketFactory;
 
     // Use this for initialization
     void Start()
     {
-        GameState.Instance.shopTrinkets.Clear();
+        _trinketFactory = new TrinketFactory();
+
         PopulatePanel(GameState.Instance.shopTrinkets);
     }
 

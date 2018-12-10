@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-using Core;
-using UniRx;
+﻿using UnityEngine;
 using Assets;
 using System.Linq;
 using System.Collections.Generic;
