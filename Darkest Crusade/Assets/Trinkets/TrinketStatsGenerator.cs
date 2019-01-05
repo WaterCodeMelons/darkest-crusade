@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core.Extensions;
 
 namespace Assets
 {
     public class TrinketStatsGenerator
     {
-        private Random _random;
+        private readonly Random _random;
         private int _probability;
 
         public TrinketStatsGenerator()
@@ -17,11 +16,12 @@ namespace Assets
         public TrinketClassEnum GenerateClass()
         {
             _probability = _random.Next(0, 100);
+
             if (_probability < 75)
             {
                 return TrinketClassEnum.Common;
             }
-            else if ((_probability >= 75) && (_probability < 94))
+            else if (_probability >= 75 && _probability < 94)
             {
                 return TrinketClassEnum.Rare;
             }
@@ -49,46 +49,36 @@ namespace Assets
             return value;
         }
 
-        public Dictionary<TrinketBuffEnum,int> statsRandomizer(Dictionary<TrinketBuffEnum, int> statsDictionary, int minValue, int maxValue)
+        public Dictionary<TrinketBuffEnum,int> StatsRandomizer(Dictionary<TrinketBuffEnum, int> statsDictionary, int minValue, int maxValue)
         {
-            
             var array = Enum.GetValues(typeof(TrinketBuffEnum));
 
             for (int i = 0; i < array.Length; i++)
             {
-                if (i == _probability)
-                {
-                    statsDictionary.Add((TrinketBuffEnum)array.GetValue(i),_random.Next(minValue, maxValue));
-                }
-                else
-                {
-                    statsDictionary.Add((TrinketBuffEnum)array.GetValue(i), 0);
-                }
-                
+                statsDictionary.Add((TrinketBuffEnum) array.GetValue(i),
+                    i == _probability ? _random.Next(minValue, maxValue) : 0);
             }
             return statsDictionary;
         }
 
-        public Dictionary<TrinketBuffEnum,int> BuffGenerator(TrinketClassEnum trinketClass) {
-
-            
-            Dictionary<TrinketBuffEnum, int> statsDictionary = new Dictionary<TrinketBuffEnum, int>();
-          
+        public Dictionary<TrinketBuffEnum,int> BuffGenerator(TrinketClassEnum trinketClass)
+        {
+            var statsDictionary = new Dictionary<TrinketBuffEnum, int>();
 
             _probability = _random.Next(0, 5);
 
             switch (trinketClass)
             {
                 case TrinketClassEnum.Common:
-                    statsRandomizer(statsDictionary, 1, 6);
+                    StatsRandomizer(statsDictionary, 1, 6);
                     break;
             
                 case TrinketClassEnum.Rare:
-                    statsRandomizer(statsDictionary, 6, 11);
+                    StatsRandomizer(statsDictionary, 6, 11);
                     break;
 
                 case TrinketClassEnum.Epic:
-                    statsRandomizer(statsDictionary, 10, 16);
+                    StatsRandomizer(statsDictionary, 10, 16);
                     break;
             }
 
@@ -97,19 +87,18 @@ namespace Assets
 
         public Dictionary<TrinketBuffEnum, int> DebuffGenerator(TrinketClassEnum trinketClass)
         {
-
-            Dictionary<TrinketBuffEnum, int> statsDictionary = new Dictionary<TrinketBuffEnum, int>();
+            var statsDictionary = new Dictionary<TrinketBuffEnum, int>();
            
             _probability = _random.Next(0, 5);
 
             switch (trinketClass)
             {
                 case TrinketClassEnum.Common:
-                    statsRandomizer(statsDictionary, -6, -2);
+                    StatsRandomizer(statsDictionary, -6, -2);
                     break;
 
                 case TrinketClassEnum.Rare:
-                    statsRandomizer(statsDictionary, -3, 0);
+                    StatsRandomizer(statsDictionary, -3, 0);
                     break;
 
                 case TrinketClassEnum.Epic:
